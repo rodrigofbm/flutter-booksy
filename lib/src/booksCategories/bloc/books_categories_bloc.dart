@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:booksy/src/bookCategories/bloc/books_categories_event.dart';
-import 'package:booksy/src/bookCategories/bloc/books_categories_state.dart';
+import 'package:booksy/src/booksCategories/bloc/books_categories_event.dart';
+import 'package:booksy/src/booksCategories/bloc/books_categories_state.dart';
 
 class BooksCategoriesBloc
     extends Bloc<BooksCategoriesEvent, BooksCategoriesState> {

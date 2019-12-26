@@ -1,5 +1,5 @@
 import 'package:booksy/repository.dart';
-import 'package:booksy/src/bookCategories/books_categorys.dart';
+import 'package:booksy/src/booksCategories/books_categories.dart';
 import 'package:booksy/src/home/bloc/home_page_bloc.dart';
 import 'package:booksy/src/home/bloc/home_page_event.dart';
 import 'package:booksy/src/home/bloc/home_page_state.dart';
