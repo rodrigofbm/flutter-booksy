@@ -7,19 +7,24 @@ class Repository {
   String baseUrl = "https://www.googleapis.com/books/v1/volumes?q=android";
 
   Future<HomePageState> getBooks() async {
-    var response = await get(baseUrl);
+    try {
+      var response = await get(baseUrl);
 
-    if (response.statusCode == 200) {
-      Map<String, dynamic> data = json.decode(response.body);
-      List<Book> books = [];
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = json.decode(response.body);
+        List<Book> books = [];
 
-      for (var i = 0; i < data["items"].length; i++) {
-        books.add(Book.fromJson(data["items"][i]));
+        for (var i = 0; i < data["items"].length; i++) {
+          books.add(Book.fromJson(data["items"][i]));
+        }
+
+        return new HomePageStateSuccess(books: books);
+      } else {
+        return new HomePageStateError(message: "Erro ao buscar livros");
       }
-
-      return new HomePageStateSuccess(books: books);
-    } else {
-      return new HomePageStateError(message: "Erro ao buscar livros");
+    } catch (e) {
+      print(e.message);
+      return new HomePageStateError(message: e.message);
     }
   }
 }

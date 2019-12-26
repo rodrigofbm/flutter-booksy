@@ -1,4 +1,5 @@
 import 'package:booksy/repository.dart';
+import 'package:booksy/src/bookCategories/books_categorys.dart';
 import 'package:booksy/src/home/bloc/home_page_bloc.dart';
 import 'package:booksy/src/home/bloc/home_page_event.dart';
 import 'package:booksy/src/home/bloc/home_page_state.dart';
@@ -21,7 +22,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int _selectedIndex = 0;
     _bloc.dispatch(HomePageEventSearch(query: ""));
 
     return Scaffold(
@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              buildListCategories(_categories, _selectedIndex),
+              BooksCategories(),
               BlocBuilder<HomePageEvent, HomePageState>(
                 bloc: _bloc,
                 builder: (context, state) {
@@ -87,40 +87,4 @@ Widget buildListBooks(categories, context, books) {
           },
         ),
       ));
-}
-
-Widget buildListCategories(categories, selectedIndex) {
-  return Container(
-    height: 80,
-    child: Container(
-      child: ListView.builder(
-        itemCount: categories.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(right: 8, left: 8),
-            child: GestureDetector(
-              onTap: () {
-                selectedIndex = index;
-              },
-              child: buildChip(categories, index, selectedIndex),
-            ),
-          );
-        },
-      ),
-    ),
-  );
-}
-
-Widget buildChip(_categorys, index, _selectedIndex) {
-  return Chip(
-    backgroundColor: index == _selectedIndex ? Colors.blue : Colors.grey[200],
-    padding: EdgeInsets.only(right: 20, left: 20),
-    label: Text(
-      _categorys[index],
-      style: TextStyle(
-          fontSize: 12,
-          color: index == _selectedIndex ? Colors.white : Colors.grey),
-    ),
-  );
 }
